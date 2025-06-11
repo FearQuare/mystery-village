@@ -4,8 +4,19 @@ from colorama import Fore, Back, Style
 town = {
     "name": 'Mystery Town',
     "citizens": [],
-    "mystery_events": [],
 }
+
+def remove_citizen():
+    id_to_remove = int(input(f"{Style.BRIGHT + Fore.BLUE}Enter the ID of the citizen you want to remove: {Style.RESET_ALL}\n"))
+    found = False
+    for citizen in town['citizens']:
+        if citizen['id'] == id_to_remove:
+            town['citizens'].remove(citizen)
+            print(f"Citizen {id_to_remove} removed successfully.")
+            found = True
+            break
+    if not found:
+        print(f"Citizen with ID {id_to_remove} not found.")
 
 def list_citizens():
     header = (
@@ -59,10 +70,10 @@ def enter_citizen():
             status = "Normal"
             statusFlag = False
         elif status == 2:
-            status == "Missing"
+            status = "Missing"
             statusFlag = False
         elif status == 3:
-            status == "Suspicious"
+            status = "Suspicious"
             statusFlag = False
         else:
             print("Please enter a valid status.")
@@ -82,7 +93,6 @@ def print_town_info():
     f"{Style.BRIGHT}Town Information:{Style.RESET_ALL}\n"
     f"    * {Style.BRIGHT + Fore.RED}Name{Style.RESET_ALL}: {town['name']}\n"
     f"    * {Style.BRIGHT + Fore.RED}Citizens{Style.RESET_ALL}: {len(town['citizens'])}\n"
-    f"    * {Style.BRIGHT + Fore.RED}Amount of Mystery Events{Style.RESET_ALL}: {len(town['mystery_events'])}\n"
     )
     print(town_info)
 
@@ -105,7 +115,9 @@ while flag:
         f"{Style.BRIGHT}Menu:{Style.RESET_ALL}\n"
         f"  1. {Style.BRIGHT + Fore.RED}Print Town Info{Style.RESET_ALL}\n"
         f"  2. {Style.BRIGHT + Fore.RED}List all citizens{Style.RESET_ALL}\n"
-        f"  3. {Style.BRIGHT + Fore.RED}Create a citizen{Style.RESET_ALL}\n\n"
+        f"  3. {Style.BRIGHT + Fore.RED}Create a citizen{Style.RESET_ALL}\n"
+        f"  4. {Style.BRIGHT + Fore.RED}Remove a citizen{Style.RESET_ALL}\n"
+        f"{Style.BRIGHT + Fore.RED}To exit enter whatever number you want besides the upper ones: {Style.RESET_ALL}\n\n"
     )
 
     choice = input(menu_info)
@@ -116,3 +128,7 @@ while flag:
         list_citizens()
     elif int(choice) == 3:
         enter_citizen()
+    elif int(choice) == 4:
+        remove_citizen()
+    else:
+        flag = False
