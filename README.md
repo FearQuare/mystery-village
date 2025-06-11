@@ -6,13 +6,13 @@ Mystery Town is a simple command-line simulation for managing a fictional town a
 
 ## Features
 - **Add Citizens:** Enter new citizens with name, age, job, and status (Normal, Missing, Suspicious).
-- - ![Creating a Citizen](images/create-citizen.png)
+  ![Creating a Citizen](images/create-citizen.png)
 - **List Citizens:** View all citizens in a neatly formatted table.
-- - ![Listing Citizens](images/citizen-list.png)
+  ![Listing Citizens](images/citizen-list.png)
 - **Remove Citizens:** Remove a citizen by their unique ID.
-- - ![Remove Citizen](images/remove-citizen.png)
+  ![Remove Citizen](images/remove-citizen.png)
 - **Town Info:** Display the town's name and current population.
-- - ![Town Info](images/town-info.png)
+  ![Town Info](images/town-info.png)
 - **Status Highlighting:** Citizens can be marked as Suspicious automatically if their name contains 'x' or their job is 'Occultist'.
 
 ## How It Works
