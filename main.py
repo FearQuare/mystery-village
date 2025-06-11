@@ -1,11 +1,27 @@
 from citizen import *
-from colorama import Fore, Back, Style, init
+from colorama import Fore, Back, Style
 
 town = {
     "name": 'Mystery Town',
     "citizens": [],
     "mystery_events": [],
 }
+
+def list_citizens():
+    header = (
+        f"{Style.BRIGHT}Citizen amount: {len(town['citizens'])}{Style.RESET_ALL}\n\n" +
+        f"{'ID'.ljust(5)} | {'Name'.ljust(15)} | {'Age'.ljust(5)} | {'Job'.ljust(15)} | {'Status'.ljust(10)}\n" +
+        "-" * 60
+    )
+    print(header)
+    for citizen in town['citizens']:
+        id_field = str(citizen['id']).ljust(5)
+        name_field = citizen['identity'][0].ljust(15)
+        age_field = str(citizen['identity'][1]).ljust(5)
+        job_field = (citizen['job'] or "-").ljust(15)
+        status_field = citizen['status'].ljust(10)
+        row = f"{id_field} | {name_field} | {age_field} | {job_field} | {status_field}"
+        print(row)
 
 def enter_citizen():
     # Setting the citizen's id
@@ -50,6 +66,9 @@ def enter_citizen():
             statusFlag = False
         else:
             print("Please enter a valid status.")
+
+    if 'x' in name.lower() or job == 'Occultist':
+        status = "Suspicious"
     
     if job != '':
         citizen = create_citizen(id, identity, status, job)
@@ -82,19 +101,18 @@ __        __   _                            _
 """
 print(Fore.CYAN + welcome_ascii + Style.RESET_ALL)
 while flag:
-
-    print_town_info()
-
     menu_info = (
         f"{Style.BRIGHT}Menu:{Style.RESET_ALL}\n"
-        f"  1. {Style.BRIGHT + Fore.RED}Create a citizen{Style.RESET_ALL}\n"
+        f"  1. {Style.BRIGHT + Fore.RED}Print Town Info{Style.RESET_ALL}\n"
+        f"  2. {Style.BRIGHT + Fore.RED}List all citizens{Style.RESET_ALL}\n"
+        f"  3. {Style.BRIGHT + Fore.RED}Create a citizen{Style.RESET_ALL}\n\n"
     )
 
     choice = input(menu_info)
 
     if int(choice) == 1:
+        print_town_info()
+    elif int(choice) == 2:
+        list_citizens()
+    elif int(choice) == 3:
         enter_citizen()
-
-    print_town_info()
-
-    flag = False
